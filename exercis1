@@ -1,4 +1,55 @@
-#exrcis 1
+import networkx as nx
+%matplotlib inline
+G = nx.Graph()
+G.add_node('a')
+nodes_to_add = ['b', 'c', 'd']
+G.add_nodes_from(nodes_to_add)
+
+# add edge from 'a' to 'b'
+# since this graph is undirected, the order doesn't matter here
+G.add_edge('a', 'b')
+
+# just like add_nodes_from, we can add edges from a sequence
+# edges should be specified as 2-tuples
+edges_to_add = [('a', 'c'), ('b', 'c'), ('c', 'd')]
+G.add_edges_from(edges_to_add)
+
+# draw the graph
+nx.draw(G, with_labels=True)
+nx.draw(G,
+        with_labels=True,
+        node_color='blue',
+        node_size=1600,
+        font_color='white',
+        font_size=16,
+        )
+# List all of the nodes
+G.nodes()
+# List all of the edges
+G.edges()
+for node in G.nodes:
+    print(node)
+for edge in G.edges:
+    print(edge)
+G.number_of_nodes()
+# list of neighbors of node 'b'
+G.neighbors('b')
+for neighbor in G.neighbors('b'):
+    print(neighbor)
+list(G.neighbors('b'))
+nx.is_tree(G)
+nx.is_connected(G)
+G.has_node('a')
+G.has_node('x')
+'d' in G.nodes
+G.has_edge('a', 'b')
+G.has_edge('a', 'd')
+('c', 'd') in G.edges
+len(list(G.neighbors('a')))
+G.degree('a')
+
+#EXCRCIS 1
+
 def get_leaves(G):
 G = nx.Graph()
 G.add_edges_from([
@@ -23,13 +74,17 @@ G.add_edge('cat','dog')
 
 nx.draw(G, with_labels=True, font_color='white', node_size=1000)
 nx.draw(SG, node_size=2000, node_color='lightblue', with_labels=True)
+
 # EXERCIS 2
+
 SG.degree('Alice')
 def max_degree(G):
     
 SG = nx.read_adjlist('../datasets/friends.adjlist')
 assert max_degree(SG) == ('Claire', 4)
+
 #EXERCIS 3
+
 def mutual_friends(G, node_1, node_2):
 SG = nx.read_adjlist('../datasets/friends.adjlist')
 assert mutual_friends(SG, 'Alice', 'Claire') == ['Frank']
